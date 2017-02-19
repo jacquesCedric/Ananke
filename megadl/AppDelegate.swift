@@ -13,19 +13,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	@IBOutlet var consoleOutput: NSTextView!
 	@IBOutlet weak var window: NSWindow!
-    
-	let bundle = Bundle.main
-	let task = Process()
+    @IBOutlet var downloadPathBar: NSPathCell!
+    @IBOutlet var megaLinkUrl: NSTextField!
 	
 	var currentUser : String = ""
-	var downloadLink = ""
-	var downloadPath : String = ""
+	var downloadPathString : String = ""
+    var downloadPathUrl : URL? = nil
 	
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		/* This next block of code helps us findout who's running the program
 		 * and the default download directory
 		 */
+		let task = Process()
 		var output : [String] = []
 		let pipe = Pipe()
 		
@@ -44,8 +44,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
 		task.waitUntilExit()
 		
+		// Set current user for paths
 		currentUser = output[0]
 		print("Found current user: " + currentUser)
+		
+		// Give ourselves a little bit of feedback
+		print("setting default download folder")
+		downloadPathString = "/Users/" + currentUser + "/Downloads"
+		print("current download path set to: " + downloadPathString)
+        downloadPathUrl = Foundation.URL(string: downloadPathString)!
+		
+		// Setup some of the interface
+        downloadPathBar.url = downloadPathUrl
 		
     }
 
@@ -53,42 +63,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
-    @IBAction func startDownloadNow(_ sender: NSButton) {
-		//var output : [String] = []
-		let pipe = Pipe()
-		
-		let path = bundle.path(forResource: "megadl", ofType: "")
-		//let path = "/usr/local/bin/megadl"
-		task.launchPath = path
-		task.arguments = ["--path", downloadPath, downloadLink]
-		task.standardOutput = pipe
-		task.launch()
-		
-		//let outdata = pipe.fileHandleForReading.readDataToEndOfFile()
-		
-		task.waitUntilExit()
-		let status = task.terminationStatus
-		
-		print(status)
-		
-    }
-	
-    /*
     @IBAction func selectDownloadPath(_ sender: NSButton) {
+        // Create a file picker panel for us
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = true
         openPanel.canCreateDirectories = false
         openPanel.canChooseFiles = false
         openPanel.begin { (result) -> Void in
+            // If the user hits okay, set the new download path
             if result == NSFileHandlingPanelOKButton {
-                //Do what you will
                 //If there's only one URL, surely 'openPanel.URL'
-                //but otherwise a for loop works
+				self.downloadPathUrl = openPanel.url
+				self.downloadPathString = self.downloadPathUrl!.path
+				self.downloadPathBar.url = self.downloadPathUrl
             }
         }
     }
-    */
+    
+    @IBAction func startDownloadNow(_ sender: NSButton) {
+		let bundle = Bundle.main
+		let task = Process()
+		
+		let pipe = Pipe()
+		
+		let path = bundle.path(forResource: "megadl", ofType: "")
+		
+		task.launchPath = path
+		task.arguments = ["--path", downloadPathString, megaLinkUrl.stringValue]
+		task.standardOutput = pipe
+		task.launch()
+		
+		task.waitUntilExit()
+		let status = task.terminationStatus
+		
+		print(status)
+    }
 
 }
 
