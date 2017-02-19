@@ -10,14 +10,16 @@
 		C44242751E586B9B0042670E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44242741E586B9B0042670E /* AppDelegate.swift */; };
 		C44242771E586B9B0042670E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C44242761E586B9B0042670E /* Assets.xcassets */; };
 		C442427A1E586B9B0042670E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C44242781E586B9B0042670E /* MainMenu.xib */; };
+		C44242821E586C980042670E /* megadl in Resources */ = {isa = PBXBuildFile; fileRef = C44242811E586C980042670E /* megadl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C44242711E586B9B0042670E /* megadl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = megadl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C44242711E586B9B0042670E /* mega.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mega.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44242741E586B9B0042670E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C44242761E586B9B0042670E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C44242791E586B9B0042670E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C442427B1E586B9B0042670E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C44242811E586C980042670E /* megadl */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = megadl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,36 +36,39 @@
 		C44242681E586B9B0042670E = {
 			isa = PBXGroup;
 			children = (
-				C44242731E586B9B0042670E /* megadl */,
+				C44242731E586B9B0042670E /* mega */,
 				C44242721E586B9B0042670E /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		C44242721E586B9B0042670E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C44242711E586B9B0042670E /* megadl.app */,
+				C44242711E586B9B0042670E /* mega.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C44242731E586B9B0042670E /* megadl */ = {
+		C44242731E586B9B0042670E /* mega */ = {
 			isa = PBXGroup;
 			children = (
+				C44242811E586C980042670E /* megadl */,
 				C44242741E586B9B0042670E /* AppDelegate.swift */,
 				C44242761E586B9B0042670E /* Assets.xcassets */,
 				C44242781E586B9B0042670E /* MainMenu.xib */,
 				C442427B1E586B9B0042670E /* Info.plist */,
 			);
+			name = mega;
 			path = megadl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C44242701E586B9B0042670E /* megadl */ = {
+		C44242701E586B9B0042670E /* mega */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "megadl" */;
+			buildConfigurationList = C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "mega" */;
 			buildPhases = (
 				C442426D1E586B9B0042670E /* Sources */,
 				C442426E1E586B9B0042670E /* Frameworks */,
@@ -73,9 +78,9 @@
 			);
 			dependencies = (
 			);
-			name = megadl;
+			name = mega;
 			productName = megadl;
-			productReference = C44242711E586B9B0042670E /* megadl.app */;
+			productReference = C44242711E586B9B0042670E /* mega.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -94,7 +99,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C442426C1E586B9B0042670E /* Build configuration list for PBXProject "megadl" */;
+			buildConfigurationList = C442426C1E586B9B0042670E /* Build configuration list for PBXProject "mega" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -107,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C44242701E586B9B0042670E /* megadl */,
+				C44242701E586B9B0042670E /* mega */,
 			);
 		};
 /* End PBXProject section */
@@ -117,6 +122,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C44242821E586C980042670E /* megadl in Resources */,
 				C44242771E586B9B0042670E /* Assets.xcassets in Resources */,
 				C442427A1E586B9B0042670E /* MainMenu.xib in Resources */,
 			);
@@ -266,7 +272,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C442426C1E586B9B0042670E /* Build configuration list for PBXProject "megadl" */ = {
+		C442426C1E586B9B0042670E /* Build configuration list for PBXProject "mega" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C442427C1E586B9B0042670E /* Debug */,
@@ -275,7 +281,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "megadl" */ = {
+		C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "mega" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C442427F1E586B9B0042670E /* Debug */,
