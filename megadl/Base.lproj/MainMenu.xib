@@ -15,7 +15,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="mega" customModuleProvider="target">
             <connections>
+                <outlet property="chooseDownloadLocationButton" destination="wDA-fe-M5g" id="zVp-kf-kAB"/>
                 <outlet property="consoleOutput" destination="qtX-zt-SMh" id="nJG-qy-xry"/>
+                <outlet property="downloadLinkButton" destination="aFB-kY-93H" id="Fcu-NR-jlk"/>
                 <outlet property="downloadPathBar" destination="dGG-1z-VRd" id="ffb-Na-ski"/>
                 <outlet property="megaLinkUrl" destination="eBw-su-WCf" id="TnS-xW-GFF"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -28,7 +30,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="mega" systemMenu="apple" id="uQy-DD-JDr">
                         <items>
-                            <menuItem title="About mega" id="5kV-Vb-QxS">
+                            <menuItem title="About mega" enabled="NO" id="5kV-Vb-QxS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
@@ -54,8 +56,47 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
                             <menuItem title="Quit mega" keyEquivalent="q" id="4sb-4s-VLi">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="terminate:" target="-1" id="Te7-pn-YzF"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Edit" id="DPv-bL-Kqh">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Edit" id="71h-8O-wfE">
+                        <items>
+                            <menuItem title="Undo" keyEquivalent="z" id="NCO-4T-2sb">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="J1z-Ca-yhv"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Redo" keyEquivalent="Z" id="rPR-AB-LAC">
+                                <connections>
+                                    <action selector="redo:" target="-1" id="dn1-6a-btq"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="o9r-yK-BtF"/>
+                            <menuItem title="Cut" keyEquivalent="x" id="Sk9-4M-jPD">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="mG1-Xu-zDX"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="6qv-j5-Jsa">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="mIc-9o-C3b"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="3aA-RK-Kwt">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="mo3-3H-xEO"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="JSK-e8-bgU">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="7hS-g5-6KN"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -70,12 +111,6 @@
                                     <action selector="performMiniaturize:" target="-1" id="VwT-WD-YPe"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Zoom" id="R4o-n2-Eq4">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="performZoom:" target="-1" id="DIl-cC-cCs"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                             <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -87,19 +122,21 @@
                     </menu>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="99" y="26"/>
+            <point key="canvasLocation" x="71" y="8"/>
         </menu>
         <window title="MegaDL" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="483" height="206"/>
+            <rect key="contentRect" x="335" y="390" width="600" height="200"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+            <value key="minSize" type="size" width="600" height="200"/>
+            <value key="maxSize" type="size" width="600" height="200"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="483" height="206"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eBw-su-WCf">
-                        <rect key="frame" x="11" y="174" width="462" height="22"/>
+                        <rect key="frame" x="11" y="168" width="580" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Paste a Mega link here" drawsBackground="YES" id="ZK7-5t-sDy">
                             <font key="font" metaFont="system"/>
@@ -107,55 +144,20 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFB-kY-93H">
-                        <rect key="frame" x="378" y="98" width="101" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Download" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kgd-2j-6ep">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="startDownloadNow:" target="Voe-Tx-rLC" id="ZoV-Kj-gMA"/>
-                        </connections>
-                    </button>
-                    <pathControl canDrawConcurrently="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w43-iU-Vwm">
-                        <rect key="frame" x="11" y="145" width="365" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="dGG-1z-VRd">
-                            <font key="font" metaFont="system"/>
-                            <url key="url" string="file://localhost/Applications/"/>
-                            <color key="backgroundColor" red="0.89803921568627454" green="0.92549019607843142" blue="0.97254901960784312" alpha="1" colorSpace="deviceRGB"/>
-                        </pathCell>
-                    </pathControl>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDA-fe-M5g">
-                        <rect key="frame" x="378" y="139" width="101" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Choose" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8d2-Sd-V2t">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="selectDownloadPath:" target="Voe-Tx-rLC" id="63c-IJ-wxP"/>
-                        </connections>
-                    </button>
-                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="R8J-Ek-5vm">
-                        <rect key="frame" x="12" y="134" width="459" height="5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    </box>
                     <scrollView wantsLayer="YES" fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5z-ND-07b">
-                        <rect key="frame" x="9" y="11" width="462" height="85"/>
+                        <rect key="frame" x="9" y="8" width="582" height="85"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <clipView key="contentView" ambiguous="YES" id="D8w-ly-aa8">
-                            <rect key="frame" x="1" y="1" width="460" height="83"/>
+                        <clipView key="contentView" ambiguous="YES" copiesOnScroll="NO" id="D8w-ly-aa8">
+                            <rect key="frame" x="1" y="1" width="580" height="83"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView ambiguous="YES" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="qtX-zt-SMh">
-                                    <rect key="frame" x="0.0" y="0.0" width="460" height="83"/>
+                                <textView ambiguous="YES" editable="NO" importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="qtX-zt-SMh">
+                                    <rect key="frame" x="0.0" y="0.0" width="580" height="83"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="460" height="83"/>
-                                    <size key="maxSize" width="467" height="10000000"/>
-                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="580" height="83"/>
+                                    <size key="maxSize" width="581" height="10000000"/>
+                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,13 +167,48 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="dAM-zU-RDD">
-                            <rect key="frame" x="445" y="1" width="16" height="83"/>
+                            <rect key="frame" x="565" y="1" width="16" height="83"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <pathControl canDrawConcurrently="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w43-iU-Vwm">
+                        <rect key="frame" x="11" y="139" width="442" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <pathCell key="cell" selectable="YES" editable="YES" alignment="left" id="dGG-1z-VRd">
+                            <font key="font" metaFont="system"/>
+                            <url key="url" string="file://localhost/Applications/"/>
+                            <color key="backgroundColor" red="0.67572351223551452" green="0.79901829012027537" blue="0.91350999958228063" alpha="1" colorSpace="calibratedRGB"/>
+                        </pathCell>
+                    </pathControl>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wDA-fe-M5g">
+                        <rect key="frame" x="455" y="133" width="142" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Choose Location" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8d2-Sd-V2t">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="selectDownloadPath:" target="Voe-Tx-rLC" id="63c-IJ-wxP"/>
+                        </connections>
+                    </button>
+                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="R8J-Ek-5vm">
+                        <rect key="frame" x="12" y="128" width="579" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </box>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFB-kY-93H">
+                        <rect key="frame" x="455" y="94" width="142" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Download" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kgd-2j-6ep">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="startDownloadNow:" target="Voe-Tx-rLC" id="ZoV-Kj-gMA"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="181.5" y="261"/>
+            <point key="canvasLocation" x="240" y="258"/>
         </window>
     </objects>
 </document>

@@ -11,15 +11,18 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	
-	@IBOutlet var consoleOutput: NSTextView!
 	@IBOutlet weak var window: NSWindow!
     @IBOutlet var downloadPathBar: NSPathCell!
     @IBOutlet var megaLinkUrl: NSTextField!
+	@IBOutlet var consoleOutput: NSTextView!
+    @IBOutlet var chooseDownloadLocationButton: NSButton!
+    @IBOutlet var downloadLinkButton: NSButton!
 	
 	var currentUser : String = ""
 	var downloadPathString : String = ""
     var downloadPathUrl : URL? = nil
 	
+	var taskQueue = DispatchQueue.global(qos: .background)
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		/* This next block of code helps us findout who's running the program
@@ -59,16 +62,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        
-    }
+    func applicationWillTerminate(_ aNotification: Notification) {}
     
     @IBAction func selectDownloadPath(_ sender: NSButton) {
         // Create a file picker panel for us
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = true
-        openPanel.canCreateDirectories = false
+        openPanel.canCreateDirectories = true
         openPanel.canChooseFiles = false
         openPanel.begin { (result) -> Void in
             // If the user hits okay, set the new download path
@@ -82,23 +83,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func startDownloadNow(_ sender: NSButton) {
-		let bundle = Bundle.main
-		let task = Process()
-		
-		let pipe = Pipe()
-		
-		let path = bundle.path(forResource: "megadl", ofType: "")
-		
-		task.launchPath = path
-		task.arguments = ["--path", downloadPathString, megaLinkUrl.stringValue]
-		task.standardOutput = pipe
-		task.launch()
-		
-		task.waitUntilExit()
-		let status = task.terminationStatus
-		
-		print(status)
+		// Check if there's actually a link to download from
+		if (megaLinkUrl.stringValue != "") {
+			taskQueue.async {
+				let bundle = Bundle.main
+				let task = Process()
+				let pipe = Pipe()
+				let path = bundle.path(forResource: "megadl", ofType: "")
+				
+				task.launchPath = path
+				task.arguments = ["--path", self.downloadPathString, self.megaLinkUrl.stringValue]
+				task.standardOutput = pipe
+				task.launch()
+				
+				self.chooseDownloadLocationButton.isEnabled = false
+				self.downloadLinkButton.isEnabled = false
+				
+				task.waitUntilExit()
+				
+				self.chooseDownloadLocationButton.isEnabled = true
+				self.downloadLinkButton.isEnabled = true
+				
+				let status = task.terminationStatus
+				print(status)
+			}
+		}
+		else {
+			print("No link inserted!")
+			consoleOutput.string = "****************************\n***  No link inserted!  ****"
+		}
     }
-
+	
 }
 
