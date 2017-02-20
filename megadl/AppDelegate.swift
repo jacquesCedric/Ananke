@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  megadl
 //
-//  Created by jacques on 18/02/2017.
+//  Created by Jacob Gaffney on 18/02/2017.
 //  Copyright © 2017 Jacob Gaffney. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-	
+	// Interface related
 	@IBOutlet weak var window: NSWindow!
     @IBOutlet var downloadPathBar: NSPathCell!
     @IBOutlet var megaLinkUrl: NSTextField!
@@ -18,12 +18,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var chooseDownloadLocationButton: NSButton!
     @IBOutlet var downloadLinkButton: NSButton!
 	
+	// Thing we should know about
 	var currentUser : String = ""
 	var downloadPathString : String = ""
     var downloadPathUrl : URL? = nil
 	
 	var taskQueue = DispatchQueue.global(qos: .background)
 
+	
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 		/* This next block of code helps us findout who's running the program
 		 * and the default download directory
@@ -60,6 +62,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		// Setup some of the interface
         downloadPathBar.url = downloadPathUrl
 		
+		consoleOutput.font = NSFont(name: "Monaco", size: 9)
+		consoleOutput.backgroundColor = NSColor.black
+		consoleOutput.textColor = NSColor.green
+		
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {}
@@ -83,7 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func startDownloadNow(_ sender: NSButton) {
-		// Check if there's actually a link to download from
+		// Check if there's actually a download link in place
 		if (megaLinkUrl.stringValue != "") {
 			taskQueue.async {
 				let bundle = Bundle.main
@@ -94,13 +100,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				task.launchPath = path
 				task.arguments = ["--path", self.downloadPathString, self.megaLinkUrl.stringValue]
 				task.standardOutput = pipe
+				
+				// So we can show users what's happening
+				self.captureStandardOutputAndRouteToTextView(task)
+				
+				// Launch our task
 				task.launch()
 				
+				// Stop silly button presses during the download
+				self.megaLinkUrl.isEnabled = false
 				self.chooseDownloadLocationButton.isEnabled = false
 				self.downloadLinkButton.isEnabled = false
 				
 				task.waitUntilExit()
 				
+				// Renable our buttons once the download is complete
+				self.megaLinkUrl.isEnabled = true
 				self.chooseDownloadLocationButton.isEnabled = true
 				self.downloadLinkButton.isEnabled = true
 				
@@ -113,6 +128,51 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 			consoleOutput.string = "****************************\n***  No link inserted!  ****"
 		}
     }
+	
+	// We'll use this to tell users what's happening - show download progress, error, etc...
+	func captureStandardOutputAndRouteToTextView(_ task:Process) {
+		let outputPipe = Pipe()
+		task.standardOutput = outputPipe
+		
+		outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+			
+		// We have to watch for changes so we know when to print them
+		NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: outputPipe.fileHandleForReading , queue: nil) {
+			notification in
+
+			// Format our data so we can print it correctly
+			let output = outputPipe.fileHandleForReading.availableData
+			let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
+			var formattedString = ""
+			
+			do {
+				let regexString = try NSRegularExpression(pattern: "[0-9][0-9];[0-9]m|\\[|0m|0K|\\?")
+				let range = NSMakeRange(0, outputString.characters.count)
+				formattedString = regexString.stringByReplacingMatches(in: outputString,
+																		options: [],
+																		range: range,
+																		withTemplate: "")
+			} catch {
+				print("regex error")
+			}
+			
+
+			// Do not live in fear of the beach ball
+			DispatchQueue.main.async(execute: {
+				let previousOutput = self.consoleOutput.string ?? ""
+				let nextOutput = previousOutput + "\n" + formattedString
+				self.consoleOutput.string = nextOutput
+
+				let range = NSRange(location:nextOutput.characters.count,length:0)
+				// Keep the relevant part of the console in view
+				self.consoleOutput.scrollRangeToVisible(range)
+
+			})
+
+			outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+		}
+			
+	}
 	
 }
 
