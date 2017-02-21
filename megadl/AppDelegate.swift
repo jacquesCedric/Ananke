@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  megadl
+//  Ananke
 //
 //  Created by Jacob Gaffney on 18/02/2017.
 //  Copyright © 2017 Jacob Gaffney. All rights reserved.

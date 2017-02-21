@@ -14,7 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C44242711E586B9B0042670E /* mega.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mega.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C44242711E586B9B0042670E /* Ananke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ananke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44242741E586B9B0042670E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C44242761E586B9B0042670E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C44242791E586B9B0042670E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -36,7 +36,7 @@
 		C44242681E586B9B0042670E = {
 			isa = PBXGroup;
 			children = (
-				C44242731E586B9B0042670E /* mega */,
+				C44242731E586B9B0042670E /* Ananke */,
 				C44242721E586B9B0042670E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,12 +45,12 @@
 		C44242721E586B9B0042670E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C44242711E586B9B0042670E /* mega.app */,
+				C44242711E586B9B0042670E /* Ananke.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C44242731E586B9B0042670E /* mega */ = {
+		C44242731E586B9B0042670E /* Ananke */ = {
 			isa = PBXGroup;
 			children = (
 				C44242811E586C980042670E /* megadl */,
@@ -59,16 +59,16 @@
 				C44242781E586B9B0042670E /* MainMenu.xib */,
 				C442427B1E586B9B0042670E /* Info.plist */,
 			);
-			name = mega;
+			name = Ananke;
 			path = megadl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C44242701E586B9B0042670E /* mega */ = {
+		C44242701E586B9B0042670E /* Ananke */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "mega" */;
+			buildConfigurationList = C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "Ananke" */;
 			buildPhases = (
 				C442426D1E586B9B0042670E /* Sources */,
 				C442426E1E586B9B0042670E /* Frameworks */,
@@ -78,9 +78,9 @@
 			);
 			dependencies = (
 			);
-			name = mega;
+			name = Ananke;
 			productName = megadl;
-			productReference = C44242711E586B9B0042670E /* mega.app */;
+			productReference = C44242711E586B9B0042670E /* Ananke.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +99,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C442426C1E586B9B0042670E /* Build configuration list for PBXProject "mega" */;
+			buildConfigurationList = C442426C1E586B9B0042670E /* Build configuration list for PBXProject "Ananke" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C44242701E586B9B0042670E /* mega */,
+				C44242701E586B9B0042670E /* Ananke */,
 			);
 		};
 /* End PBXProject section */
@@ -250,7 +250,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = megadl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jacques.megadl;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jacques.ananke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -263,7 +264,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = megadl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jacques.megadl;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jacques.ananke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -272,7 +274,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C442426C1E586B9B0042670E /* Build configuration list for PBXProject "mega" */ = {
+		C442426C1E586B9B0042670E /* Build configuration list for PBXProject "Ananke" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C442427C1E586B9B0042670E /* Debug */,
@@ -281,13 +283,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "mega" */ = {
+		C442427E1E586B9B0042670E /* Build configuration list for PBXNativeTarget "Ananke" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C442427F1E586B9B0042670E /* Debug */,
 				C44242801E586B9B0042670E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
