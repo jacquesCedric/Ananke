@@ -17,6 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet var consoleOutput: NSTextView!
     @IBOutlet var chooseDownloadLocationButton: NSButton!
     @IBOutlet var downloadLinkButton: NSButton!
+    @IBOutlet var decryptionKey: NSTextField!
+    @IBOutlet var decryptionKeyEnabledCheckbox: NSButton!
 	
 	// Thing we should know about
 	var currentUser : String = ""
@@ -70,6 +72,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_ aNotification: Notification) {}
     
+    @IBAction func decryptKeyEnabled(_ sender: NSButton) {
+		if decryptionKeyEnabledCheckbox.state == 0 {
+			decryptionKey.isEnabled = false
+		}
+		else {
+			decryptionKey.isEnabled = true
+		}
+    }
+    
     @IBAction func selectDownloadPath(_ sender: NSButton) {
         // Create a file picker panel for us
         let openPanel = NSOpenPanel()
@@ -98,7 +109,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				let path = bundle.path(forResource: "megadl", ofType: "")
 				
 				task.launchPath = path
-				task.arguments = ["--path", self.downloadPathString, self.megaLinkUrl.stringValue]
+				task.arguments = ["--path", self.downloadPathString, self.megaLinkUrl.stringValue + self.decryptionKey.stringValue]
 				task.standardOutput = pipe
 				
 				// So we can show users what's happening
@@ -111,6 +122,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				self.megaLinkUrl.isEnabled = false
 				self.chooseDownloadLocationButton.isEnabled = false
 				self.downloadLinkButton.isEnabled = false
+				self.decryptionKey.isEnabled = false
+				self.decryptionKeyEnabledCheckbox.isEnabled = false
 				
 				task.waitUntilExit()
 				
@@ -118,9 +131,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 				self.megaLinkUrl.isEnabled = true
 				self.chooseDownloadLocationButton.isEnabled = true
 				self.downloadLinkButton.isEnabled = true
+				self.decryptionKey.isEnabled = true
+				self.decryptionKeyEnabledCheckbox.isEnabled = true
 				
 				let status = task.terminationStatus
 				print(status)
+				
+				if (status == 1) {
+					self.consoleOutput.string = "Something went wrong with the download!"
+					task.terminate()
+					self.megaLinkUrl.isEnabled = true
+					self.chooseDownloadLocationButton.isEnabled = true
+					self.downloadLinkButton.isEnabled = true
+					self.decryptionKey.isEnabled = false
+					self.decryptionKeyEnabledCheckbox.isEnabled = false
+				}
 			}
 		}
 		else {
