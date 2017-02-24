@@ -5,11 +5,16 @@ A macOS application that allows you to download files and folders from the popul
 
 ### Prerequisites
 - MacOS 10.11 or greater
+- Have Homebrew installed [[link](https://brew.sh/)]
 
 ### How to use
-1. Download the app from the [Releases page](https://github.com/jacquesCedric/Ananke/releases) or, optionally, compile from source (see below)
-2. Unzip and place in Applications folder
-3. Open Application
+1. Install megatools
+~~~~
+brew install megatools
+~~~~
+2. Download the app from the [Releases page](https://github.com/jacquesCedric/Ananke/releases) or, optionally, compile from source (see below)
+3. Unzip and place in Applications folder
+4. Open Application
 5. Paste in a Mega link
 6. Choose a download location
 7. Download!
