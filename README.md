@@ -9,9 +9,10 @@ A macOS application that allows you to download files and folders from the popul
 
 ### How to use
 1. Install megatools
-~~~~
-brew install megatools
-~~~~
+
+ ~~~~
+ brew install megatools
+ ~~~~
 2. Download the app from the [Releases page](https://github.com/jacquesCedric/Ananke/releases) or, optionally, compile from source (see below)
 3. Unzip and place in Applications folder
 4. Open Application
