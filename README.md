@@ -1,7 +1,9 @@
 # Ananke ![](https://github.com/jacquesCedric/Ananke/blob/master/megadl/Assets.xcassets/AppIcon.appiconset/icon_32x32.png?raw=true)
 
 ![](https://github.com/jacquesCedric/Ananke/blob/master/anankeScreen.png?raw=true)  
-A macOS application that allows you to download files and folders from the popular file-sharing service, Mega.nz. This application also bypasses download restrictions for non-pro users.
+A macOS application that allows you to download files and folders from the popular file-sharing service, Mega.nz. This used to allow users to bypass download restrictions.
+
+Now deprecated as mega has patched this aspect of their api.
 
 ### Prerequisites
 - MacOS 10.11 or greater
